@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #111422;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    user-select: none;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 900px;
+    padding: 10px;
+}
+
+.game-board {
+    width: 100%;
+    height: 480px;
+    border-left: 4px solid #333333;
+    border-right: 4px solid #333333;
+    border-bottom: 20px solid rgb(35, 160, 35);
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(#87ceeb, #e0f6ff);
+}
+
+.pipe {
+    position: absolute;
+    bottom: 0;
+    width: 80px;
+    right: -80px;
+}
+
+.mario {
+    width: 150px;
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    z-index: 10;
+}
+
+.clouds {
+    position: absolute;
+    width: 550px;
+    top: 30px;
+    right: -550px;
+}
+
+.game-board.running .pipe {
+    animation: pipe-animation 1.6s infinite linear;
+}
+
+.game-board.running .clouds {
+    animation: clouds-animation 18s infinite linear;
+}
+
+.jump {
+    animation: jump-animation 500ms ease-out;
+    /* ease-out começa mais rapido e desacelera no final */
+}
+
+@keyframes pipe-animation {
+    from {
+        right: -80px;
+    }
+
+    to {
+        right: 100%;
+    }
+}
+
+@keyframes jump-animation {
+    0% {
+        bottom: 0;
+    }
+
+    40% {
+        bottom: 180px;
+    }
+
+    50% {
+        bottom: 180px;
+    }
+
+    100% {
+        bottom: 0;
+    }
+}
+
+@keyframes clouds-animation {
+    from {
+        right: -550px;
+    }
+
+    to {
+        right: 100%;
+    }
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 12, 22, 0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-card {
+    background: #1f2438;
+    border: 4px solid #e52521;
+    border-radius: 16px;
+    padding: 30px;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+}
+
+.start-form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group input{
+    width: 100%;
+    padding: 14px 18px;
+}
+
