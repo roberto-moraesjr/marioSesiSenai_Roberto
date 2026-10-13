@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mario Jump</title>
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js"></script>
 </head>
 <body>
     <div class="game-container">
@@ -68,5 +69,55 @@
             </form>
         </div>
     </div>
+    <div class="modal-overlay" id="gameover-modal">
+        <div class="modal-card gameover-card">
+            <div class="modal-header">
+                <h2 class="gameover-title">GAME OVER</h2>
+                <div class="final-score-box">
+                    <div class="final-score-label">SUA PONTUAÇÃO</div>
+                    <div class="final-score-num" id="final-score-value">0</div>
+                    <div class="save-status" id="save-status-msg"></div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-primary" id="btn-restart">JOGAR NOVAMENTE</button>
+                <button type="button" class="btn btn-secondary" id="btn-change-player">TROCAR JOGADOR</button>
+            </div>
+        </div>
+    </div>
+    
+           <div class="ranking-container">
+                <h3 class="ranking-title">🏆 TOP 10 MELHORES PONTUAÇÕES</h3>
+                <div class="table-wrapper">
+                    <table class="ranking-table">
+                        <thead>
+                            <tr>
+                                <th>POS</th>
+                                <th>JOGADOR</th>
+                                <th>PONTUAÇÃO</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ranking-body">
+                            <?php if (!empty($rankingInicial)): ?>
+                                <?php foreach ($rankingInicial as $i => $row): ?>
+                                    <tr>
+                                        <td class="ranking-pos">
+                                            <?= $i === 0 ? '🥇 1º' : ($i === 1 ? '🥈 2º' : ($i === 2 ? '🥉 3º' : ($i + 1) . 'º')) ?>
+                                        </td>
+                                        <td><strong><?= htmlspecialchars($row['nome']) ?></strong></td>
+                                        <td><?= (int)$row['pontos'] ?> pts</td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="3" class="loading-cell">Nenhuma pontuação gravada ainda. Jogue para ser o 1º!</td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
 </body>
 </html>
